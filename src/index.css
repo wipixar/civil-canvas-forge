@@ -8,35 +8,63 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Engineering-inspired color palette */
+    --background: 218 23% 97%;
+    --foreground: 210 11% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 210 11% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 11% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Steel Blue primary with engineering precision */
+    --primary: 214 84% 56%;
+    --primary-foreground: 0 0% 98%;
+    --primary-hover: 214 84% 46%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Charcoal secondary for structure */
+    --secondary: 215 16% 47%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Slate gray muted tones */
+    --muted: 215 16% 95%;
+    --muted-foreground: 215 13% 37%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Safety orange accent for actionable elements */
+    --accent: 24 95% 53%;
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 215 20% 88%;
+    --input: 215 20% 88%;
+    --ring: 214 84% 56%;
 
-    --radius: 0.5rem;
+    /* Engineering precision radius */
+    --radius: 0.75rem;
+
+    /* Engineering-specific design tokens */
+    --blueprint: 200 100% 85%;
+    --steel: 215 16% 47%;
+    --concrete: 30 7% 85%;
+    --safety-yellow: 55 100% 55%;
+    --caution-red: 0 84% 60%;
+    
+    /* Gradients for depth and innovation */
+    --gradient-primary: linear-gradient(135deg, hsl(214 84% 56%), hsl(214 84% 46%));
+    --gradient-steel: linear-gradient(180deg, hsl(215 16% 47%), hsl(215 16% 37%));
+    --gradient-surface: linear-gradient(145deg, hsl(0 0% 100%), hsl(215 16% 97%));
+    
+    /* Shadows with engineering precision */
+    --shadow-engineering: 0 4px 20px -2px hsl(215 16% 47% / 0.15);
+    --shadow-blueprint: 0 8px 32px -4px hsl(214 84% 56% / 0.2);
+    --shadow-panel: 0 2px 8px -1px hsl(215 16% 47% / 0.1);
+    
+    /* Animation curves for precision movement */
+    --ease-engineering: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-blueprint: cubic-bezier(0.25, 0.1, 0.25, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +128,91 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  /* Engineering CMS specific component styles */
+  .engineering-panel {
+    @apply bg-gradient-to-br from-white to-slate-50 border border-slate-200 shadow-lg;
+    box-shadow: var(--shadow-engineering);
+  }
+
+  .blueprint-pattern {
+    background-image: 
+      linear-gradient(45deg, hsl(var(--blueprint)) 25%, transparent 25%),
+      linear-gradient(-45deg, hsl(var(--blueprint)) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, hsl(var(--blueprint)) 75%),
+      linear-gradient(-45deg, transparent 75%, hsl(var(--blueprint)) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  }
+
+  .steel-surface {
+    background: var(--gradient-steel);
+  }
+
+  .engineering-shadow {
+    box-shadow: var(--shadow-engineering);
+  }
+
+  .blueprint-shadow {
+    box-shadow: var(--shadow-blueprint);
+  }
+
+  .panel-shadow {
+    box-shadow: var(--shadow-panel);
+  }
+
+  /* Engineering micro-interactions */
+  .engineering-hover {
+    @apply transition-all duration-300;
+    transition-timing-function: var(--ease-engineering);
+  }
+
+  .engineering-hover:hover {
+    @apply scale-105;
+    box-shadow: var(--shadow-blueprint);
+  }
+
+  .blueprint-draw {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .blueprint-draw::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: hsl(var(--primary));
+    animation: blueprint-line 2s ease-in-out infinite;
+  }
+
+  @keyframes blueprint-line {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+  }
+
+  /* Hexagon shapes for engineering aesthetics */
+  .hexagon {
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+
+  .engineering-icon {
+    @apply transition-transform duration-200;
+    transition-timing-function: var(--ease-engineering);
+  }
+
+  .engineering-icon:hover {
+    @apply rotate-12 scale-110;
   }
 }
